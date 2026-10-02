@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Invoice</title>
+
+<style>
+
+body{
+font-family:Arial;
+padding:40px;
+}
+
+.invoice-box{
+max-width:800px;
+margin:auto;
+border:1px solid #eee;
+padding:30px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+table th,table td{
+border:1px solid #ddd;
+padding:10px;
+}
+
+.print-btn{
+margin-top:20px;
+}
+
+@media print{
+.print-btn{
+display:none;
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="invoice-box">
+
+<h2>INVOICE</h2>
+
+<p>Date: <span id="date"></span></p>
+
+<table id="invoiceItems">
+
+<tr>
+<th>Product</th>
+<th>Price</th>
+<th>Qty</th>
+<th>Total</th>
+</tr>
+
+</table>
+
+<h2>Total: ₹ <span id="total"></span></h2>
+
+<button class="print-btn" onclick="window.print()">Print Invoice</button>
+
+</div>
+
+<script src="js/invoice.js"></script>
+
+</body>
+</html>

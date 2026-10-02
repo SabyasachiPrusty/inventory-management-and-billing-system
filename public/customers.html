@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Customers</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<h2>Customer Management</h2>
+
+<div>
+<input id="cname" placeholder="Customer Name">
+<input id="cphone" placeholder="Phone">
+<button onclick="addCustomer()">Add Customer</button>
+</div>
+
+<table border="1" width="70%" align="center">
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Phone</th>
+</tr>
+</thead>
+
+<tbody id="customerList"></tbody>
+</table>
+
+<script>
+
+const token = localStorage.getItem("token");
+
+function loadCustomers(){
+
+fetch("/api/customers",{
+headers:{ "Authorization": token }
+})
+.then(res=>res.json())
+.then(data=>{
+
+let html="";
+data.forEach(c=>{
+html += `
+<tr>
+<td>${c.id}</td>
+<td>${c.name}</td>
+<td>${c.phone}</td>
+</tr>
+`;
+});
+
+document.getElementById("customerList").innerHTML = html;
+
+});
+}
+
+function addCustomer(){
+
+const name=document.getElementById("cname").value;
+const phone=document.getElementById("cphone").value;
+
+fetch("/api/customers/add",{
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+"Authorization": token
+},
+body:JSON.stringify({name,phone})
+})
+.then(()=>loadCustomers());
+
+}
+
+loadCustomers();
+
+</script>
+
+</body>
+</html>

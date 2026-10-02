@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<h1>Inventory Dashboard</h1>
+
+<div class="menu">
+
+<a href="products.html">Manage Products</a>
+<a href="billing.html">Billing</a>
+<a href="sales.html">Sales History</a>
+<a href="customers.html">Customers</a>
+
+</div>
+
+</body>
+</html>
+
+<div class="card">
+<h3>Total Products</h3>
+<p id="productCount">0</p>
+</div>
+
+<div class="card">
+<h3>Total Sales</h3>
+<p id="salesCount">0</p>
+</div>
+
+</div>
+
+</div>
+<script>
+
+const role = localStorage.getItem("role");
+
+if(role !== "admin"){
+document.getElementById("adminPanel").style.display="none";
+}
+
+</script>
+
+</body>
+</html>

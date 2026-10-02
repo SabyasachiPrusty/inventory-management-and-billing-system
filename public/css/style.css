@@ -1,0 +1,58 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Background with a smooth gradient */
+body{
+font-family: Arial;
+background: linear-gradient(135deg,#2c3e50,#4ca1af);
+color:white;
+text-align:center;
+}
+
+.login-box{
+width:300px;
+margin:150px auto;
+padding:40px;
+background:white;
+color:black;
+border-radius:10px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+.action-btn {
+    margin-right: 8px;
+    padding-right: 8px;
+    background:#3498db;
+    color:white;
+    boarder-right: 1px solid black;
+    cursor:pointer;
+}
+
+
+button:hover{
+background:#2980b9;
+}
+
+.menu a{
+display:block;
+padding:15px;
+margin:10px;
+background:white;
+color:black;
+border-radius:6px;
+text-decoration:none;
+}
+

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Billing</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<h2>Billing System</h2>
+
+<div>
+<select id="product"></select>
+<input id="qty" placeholder="Quantity">
+<button onclick="generateBill()">Generate Bill</button>
+</div>
+
+<h3>Sales History</h3>
+
+<table border="1" width="80%" align="center">
+<thead>
+<tr>
+<th>ID</th>
+<th>Product</th>
+<th>Qty</th>
+<th>Total</th>
+</tr>
+</thead>
+
+<tbody id="salesList"></tbody>
+</table>
+
+<script>
+
+const token = localStorage.getItem("token");
+
+function loadProducts(){
+
+fetch("/api/products",{
+headers:{ "Authorization": token }
+})
+.then(res=>res.json())
+.then(data=>{
+
+let options="";
+data.forEach(p=>{
+options += `<option value="${p.id}" data-price="${p.price}">
+${p.name}
+</option>`;
+});
+
+document.getElementById("product").innerHTML = options;
+
+});
+}
+
+function generateBill(){
+
+const productSelect = document.getElementById("product");
+const product_id = productSelect.value;
+const price = productSelect.selectedOptions[0].dataset.price;
+const quantity = document.getElementById("qty").value;
+
+fetch("/api/sales/bill",{
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+"Authorization": token
+},
+body:JSON.stringify({product_id,quantity,price})
+})
+.then(()=>loadSales());
+
+}
+
+function loadSales(){
+
+fetch("/api/sales",{
+headers:{ "Authorization": token }
+})
+.then(res=>res.json())
+.then(data=>{
+
+let html="";
+data.forEach(s=>{
+html += `
+<tr>
+<td>${s.id}</td>
+<td>${s.product_id}</td>
+<td>${s.quantity}</td>
+<td>${s.total}</td>
+</tr>
+`;
+});
+
+document.getElementById("salesList").innerHTML = html;
+
+});
+}
+
+loadProducts();
+loadSales();
+
+</script>
+
+</body>
+</html>
